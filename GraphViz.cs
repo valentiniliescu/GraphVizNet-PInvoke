@@ -9,6 +9,13 @@ namespace GraphVizNet
         private const string LibGraph = "cgraph";
         private const int Success = 0;
 
+        /// <summary>
+        /// Layouts and renders a graph
+        /// </summary>
+        /// <param name="source">The textual description of the graph</param>
+        /// <param name="layout">Specifies the layout algorithm (e.g. "dot"), see https://www.graphviz.org/pdf/dot.1.pdf for more layout algorithms.</param>
+        /// <param name="format">Specifies the output format (e.g. "png"), see https://www.graphviz.org/doc/info/output.html for more output formats.</param>
+        /// <returns></returns>
         public static byte[] LayoutAndRender(string source, string layout, string format)
         {
             var context = IntPtr.Zero;

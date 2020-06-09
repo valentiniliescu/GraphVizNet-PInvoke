@@ -1,0 +1,11 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <!-- TODO: Copy from x64 folder for AnyCPU or x64 projects, from x86 folder for x86 projects -->
+    <!-- TODO: For .NET Core projects, hide the native libraries from showing up in the project -->
+    <NativeLibs Include="$(MSBuildThisFileDirectory)/native/x64/*" />
+    <None Include="@(NativeLibs)">
+      <Link>%(FileName)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

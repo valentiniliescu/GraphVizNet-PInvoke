@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.6-alpha</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageTags>graphviz dot graph rendering plotting graphviznet</PackageTags>
+    <Description>Wrapper for the GraphViz native library(version 2.44.0)</Description>
+  </PropertyGroup>
+
+  <!-- 
+  The recommended way is to use runtimes folder for deploying native assemblies. Also, you could use DllImportResolver in .NET Core 3.0 to load the assemblies specific for the current platform/runtime identifier (e.g. win-x64)
+  However, GraphViz native libraries have issues with the native libraries being in a subfolder,
+  at runtime you get this warning 'Could not load "gvplugin_pango.dll" - It was found, so perhaps one of its dependents was not.  Try ldd.' and the rendered graph is wrong (e.g. for png the labels are shifted).
+  So instead the native assemblies will be copied to the output directory of the project using a .targets file.
+  .NET FX projects referencing this NuGet cannot be AnyCpu, you need to be platform specific (x86 or x64).
+  -->
+  <ItemGroup>
+    <None Update="native/**/*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackagePath>/build</PackagePath>
+    </None>
+    <None Update="GraphVizNet.targets">
+      <Pack>true</Pack>
+      <PackagePath>/build</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="native\x64\" />
+    <Folder Include="native\x86\" />
+  </ItemGroup>
+
+</Project>

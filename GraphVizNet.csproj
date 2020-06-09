@@ -16,6 +16,8 @@
   .NET FX projects referencing this NuGet cannot be AnyCpu, you need to be platform specific (x86 or x64).
   -->
   <ItemGroup>
+    <!-- TODO: For projects that reference this directly, copy to the top folder -->
+    <!-- TODO: For projects that reference this directly, copy from x64 folder for AnyCPU or x64 projects, from x86 folder for x86 projects -->
     <None Update="native/**/*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
